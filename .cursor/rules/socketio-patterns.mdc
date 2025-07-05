@@ -1,0 +1,60 @@
+---
+globs: server.js,multiplayer.js
+---
+
+# 🔌 Socket.IO 通信模式
+
+## 服务器端事件处理
+```javascript
+// 玩家连接
+socket.on('joinRoom', (roomId) => {
+    // 房间管理逻辑
+});
+
+// 游戏操作
+socket.on('buildTower', (data) => {
+    // 验证和处理炮塔建造
+});
+
+socket.on('startWave', () => {
+    // 开始新波次
+});
+
+// 断开连接清理
+socket.on('disconnect', () => {
+    // 清理玩家状态
+});
+```
+
+## 客户端事件处理
+```javascript
+// 连接状态
+socket.on('connect', () => {
+    isConnected = true;
+    socket.emit('joinRoom', roomId);
+});
+
+// 游戏状态同步
+socket.on('gameState', (data) => {
+    gameState = data.gameState;
+    allPlayers = data.players;
+});
+
+// 实时更新
+socket.on('towerBuilt', (tower) => {
+    towers.push(new Tower(...));
+});
+```
+
+## 通信规则
+- 使用明确的事件名称（动作+名词）
+- 服务器验证所有客户端请求
+- 状态同步使用广播机制
+- 错误处理使用error事件
+- 房间隔离避免数据泄露
+
+## 多人游戏特定模式
+- 区域分配：每个玩家固定建造区域
+- 状态共享：生命值和金币全局共享
+- 实时同步：游戏状态60FPS更新
+- 聊天系统：独立的消息通道

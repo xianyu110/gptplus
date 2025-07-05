@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多人塔防游戏</title>
+    <link rel="stylesheet" href="multiplayer.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>多人塔防游戏</h1>
+            <div class="game-stats">
+                <div class="stat">
+                    <span>关卡: </span>
+                    <span id="level">1</span>
+                </div>
+                <div class="stat">
+                    <span>生命: </span>
+                    <span id="lives">20</span>
+                </div>
+                <div class="stat">
+                    <span>金币: </span>
+                    <span id="money">150</span>
+                </div>
+                <div class="stat">
+                    <span>得分: </span>
+                    <span id="score">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="players-panel">
+                    <h3>玩家列表</h3>
+                    <div id="playersList" class="players-list"></div>
+                </div>
+                
+                <div class="tower-selection">
+                    <h3>炮塔选择</h3>
+                    <div class="tower-buttons">
+                        <button id="basicTower" class="tower-btn selected" data-type="basic">
+                            <div class="tower-icon">⚪</div>
+                            <div class="tower-info">
+                                <div>基础炮塔</div>
+                                <div>费用: 20</div>
+                            </div>
+                        </button>
+                        <button id="heavyTower" class="tower-btn" data-type="heavy">
+                            <div class="tower-icon">🔴</div>
+                            <div class="tower-info">
+                                <div>重炮塔</div>
+                                <div>费用: 50</div>
+                            </div>
+                        </button>
+                        <button id="rapidTower" class="tower-btn" data-type="rapid">
+                            <div class="tower-icon">🟡</div>
+                            <div class="tower-info">
+                                <div>速射炮塔</div>
+                                <div>费用: 35</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="game-actions">
+                    <button id="startWave" class="action-btn">开始波次</button>
+                    <button id="nextLevel" class="action-btn" style="display: none;">下一关</button>
+                    <button id="pauseGame" class="action-btn">暂停</button>
+                    <button id="restartGame" class="action-btn">重新开始</button>
+                    <button id="playerReady" class="action-btn ready-btn">准备</button>
+                </div>
+            </div>
+            
+            <div class="game-area">
+                <div class="zone-info">
+                    <div id="currentZone" class="current-zone">
+                        <span>您的建造区域: </span>
+                        <span id="zoneDisplay">等待分配...</span>
+                    </div>
+                </div>
+                
+                <canvas id="gameCanvas" width="800" height="600"></canvas>
+                
+                <div class="game-info">
+                    <div class="wave-info">
+                        <span>当前波次: </span>
+                        <span id="currentWave">0</span>
+                        <span> / </span>
+                        <span id="totalWaves">5</span>
+                    </div>
+                    <div class="enemy-info">
+                        <span>剩余敌人: </span>
+                        <span id="remainingEnemies">0</span>
+                    </div>
+                    <div class="room-info">
+                        <span>房间ID: </span>
+                        <span id="roomId">default</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-panel">
+                <div class="chat-panel">
+                    <h3>聊天</h3>
+                    <div id="chatMessages" class="chat-messages"></div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="输入消息..." maxlength="100">
+                        <button id="sendChat">发送</button>
+                    </div>
+                </div>
+                
+                <div class="connection-panel">
+                    <h3>连接状态</h3>
+                    <div id="connectionStatus" class="connection-status">
+                        <span class="status-indicator" id="statusIndicator">●</span>
+                        <span id="statusText">连接中...</span>
+                    </div>
+                    <div class="room-actions">
+                        <input type="text" id="roomInput" placeholder="房间ID" value="default">
+                        <button id="joinRoom">加入房间</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <h2 id="gameOverTitle">游戏结束</h2>
+            <p id="gameOverMessage">太多敌人逃脱了！</p>
+            <div class="modal-actions">
+                <button onclick="restartGame()">重新开始</button>
+                <button onclick="closeModal()">关闭</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <h2>错误</h2>
+            <p id="errorMessage"></p>
+            <div class="modal-actions">
+                <button onclick="closeErrorModal()">确定</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Socket.IO 客户端 -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="multiplayer.js"></script>
+</body>
+</html> 

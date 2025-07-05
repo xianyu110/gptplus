@@ -1,0 +1,25 @@
+---
+alwaysApply: true
+---
+
+# 🎮 塔防游戏项目结构规则
+
+## 项目概览
+这是一个基于Web技术的多人塔防游戏，支持单人和多人模式。
+
+## 核心文件结构
+- **单人模式**：[index.html](mdc:tower-defense-game/index.html) + [game.js](mdc:tower-defense-game/game.js) + [style.css](mdc:tower-defense-game/style.css)
+- **多人模式**：[multiplayer.html](mdc:tower-defense-game/multiplayer.html) + [multiplayer.js](mdc:tower-defense-game/multiplayer.js) + [multiplayer.css](mdc:tower-defense-game/multiplayer.css)
+- **服务器**：[server.js](mdc:tower-defense-game/server.js)
+- **配置**：[package.json](mdc:tower-defense-game/package.json)
+
+## 架构原则
+- 前后端分离设计
+- 单人和多人模式代码分离
+- 配置驱动的游戏参数
+- 模块化的类设计
+- 实时通信使用Socket.IO
+
+## 部署方式
+- 单人模式：`python3 -m http.server 8000`
+- 多人模式：`node server.js`（端口3000）

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>塔防游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>塔防游戏</h1>
+            <div class="game-stats">
+                <div class="stat">
+                    <span>关卡: </span>
+                    <span id="level">1</span>
+                </div>
+                <div class="stat">
+                    <span>生命: </span>
+                    <span id="lives">10</span>
+                </div>
+                <div class="stat">
+                    <span>金币: </span>
+                    <span id="money">100</span>
+                </div>
+                <div class="stat">
+                    <span>得分: </span>
+                    <span id="score">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-area">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+            
+            <div class="game-controls">
+                <div class="tower-selection">
+                    <h3>炮塔选择</h3>
+                    <div class="tower-buttons">
+                        <button id="basicTower" class="tower-btn selected" data-type="basic">
+                            <div class="tower-icon">⚪</div>
+                            <div class="tower-info">
+                                <div>基础炮塔</div>
+                                <div>费用: 20</div>
+                            </div>
+                        </button>
+                        <button id="heavyTower" class="tower-btn" data-type="heavy">
+                            <div class="tower-icon">🔴</div>
+                            <div class="tower-info">
+                                <div>重炮塔</div>
+                                <div>费用: 50</div>
+                            </div>
+                        </button>
+                        <button id="rapidTower" class="tower-btn" data-type="rapid">
+                            <div class="tower-icon">🟡</div>
+                            <div class="tower-info">
+                                <div>速射炮塔</div>
+                                <div>费用: 35</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="game-actions">
+                    <button id="startWave" class="action-btn">开始波次</button>
+                    <button id="nextLevel" class="action-btn" style="display: none;">下一关</button>
+                    <button id="pauseGame" class="action-btn">暂停</button>
+                    <button id="restartGame" class="action-btn">重新开始</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-info">
+            <div class="wave-info">
+                <span>当前波次: </span>
+                <span id="currentWave">0</span>
+                <span> / </span>
+                <span id="totalWaves">5</span>
+            </div>
+            <div class="enemy-info">
+                <span>剩余敌人: </span>
+                <span id="remainingEnemies">0</span>
+            </div>
+        </div>
+    </div>
+    
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <h2 id="gameOverTitle">游戏结束</h2>
+            <p id="gameOverMessage">太多敌人逃脱了！</p>
+            <div class="modal-actions">
+                <button onclick="restartGame()">重新开始</button>
+                <button onclick="closeModal()">关闭</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html> 

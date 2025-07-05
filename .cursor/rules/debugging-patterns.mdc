@@ -1,0 +1,67 @@
+---
+description: Debugging and testing patterns for tower defense game
+---
+
+# 🐛 调试和测试模式
+
+## 服务器调试
+```javascript
+// 控制台日志模式
+console.log(`Player ${player.name} joined room ${roomId}`);
+console.log(`Spawned enemy ${spawned}/${enemyCount} in room ${roomId}`);
+console.log(`Enemy escaped. Lives remaining: ${lives}`);
+
+// 错误处理
+socket.on('error', (error) => {
+    console.error('Socket error:', error);
+    showError(error.message);
+});
+```
+
+## 客户端调试
+```javascript
+// 游戏状态监控
+console.log('Game state:', gameState);
+console.log('Connected players:', allPlayers);
+
+// 性能监控
+const startTime = performance.now();
+// 游戏逻辑
+const endTime = performance.now();
+console.log(`Update took ${endTime - startTime} ms`);
+```
+
+## 常见问题排查
+1. **炮塔无法建造**
+   - 检查金币是否足够
+   - 验证建造区域限制
+   - 确认炮塔类型有效性
+
+2. **敌人不出现**
+   - 检查服务器enemySpawn逻辑
+   - 验证关卡配置
+   - 确认波次状态
+
+3. **多人同步问题**
+   - 检查Socket.IO连接状态
+   - 验证房间管理逻辑
+   - 确认状态广播机制
+
+## 测试命令
+```bash
+# 启动单人模式测试
+cd tower-defense-game && python3 -m http.server 8000
+
+# 启动多人模式测试
+cd tower-defense-game && node server.js
+
+# 检查进程状态
+ps aux | grep "node server.js"
+netstat -an | grep 3000
+```
+
+## 性能优化检查点
+- requestAnimationFrame使用正确
+- 避免频繁DOM操作
+- 内存泄漏监控
+- 网络请求优化

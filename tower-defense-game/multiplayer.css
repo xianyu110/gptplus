@@ -1,0 +1,721 @@
+/* 基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.game-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 1400px;
+    width: 100%;
+    margin: 20px auto;
+}
+
+/* 游戏头部 */
+.game-header {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.game-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    min-width: 100px;
+}
+
+.stat span:first-child {
+    font-weight: bold;
+    opacity: 0.9;
+}
+
+.stat span:last-child {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* 主要内容区域 */
+.main-content {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    min-height: 700px;
+}
+
+.left-panel, .right-panel {
+    flex: 0 0 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.game-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 区域信息 */
+.zone-info {
+    margin-bottom: 10px;
+}
+
+.current-zone {
+    background: rgba(79, 172, 254, 0.1);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #4facfe;
+    font-weight: bold;
+}
+
+/* 游戏画布 */
+#gameCanvas {
+    border: 3px solid #4facfe;
+    border-radius: 15px;
+    background: #f8f9fa;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    cursor: crosshair;
+}
+
+/* 玩家列表 */
+.players-panel {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.players-panel h3 {
+    color: #4facfe;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.players-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.player-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background: #f8f9fa;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.player-item.current-player {
+    border-color: #4facfe;
+    background: rgba(79, 172, 254, 0.1);
+}
+
+.player-item.ready {
+    border-color: #2ed573;
+    background: rgba(46, 213, 115, 0.1);
+}
+
+.player-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 0.9em;
+}
+
+.player-info {
+    flex: 1;
+}
+
+.player-name {
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.player-zone {
+    font-size: 0.8em;
+    opacity: 0.8;
+}
+
+.player-status {
+    font-size: 0.8em;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: #e0e0e0;
+}
+
+.player-status.ready {
+    background: #2ed573;
+    color: white;
+}
+
+.player-status.playing {
+    background: #4facfe;
+    color: white;
+}
+
+/* 炮塔选择 */
+.tower-selection {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tower-selection h3 {
+    color: #4facfe;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.tower-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tower-btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.tower-btn:hover {
+    border-color: #4facfe;
+    background: #f8f9ff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(79, 172, 254, 0.2);
+}
+
+.tower-btn.selected {
+    border-color: #4facfe;
+    background: #4facfe;
+    color: white;
+}
+
+.tower-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.tower-icon {
+    font-size: 2em;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+}
+
+.tower-info {
+    flex: 1;
+}
+
+.tower-info div:first-child {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.tower-info div:last-child {
+    opacity: 0.8;
+    font-size: 0.9em;
+}
+
+/* 游戏操作 */
+.game-actions {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+.action-btn:last-child {
+    margin-bottom: 0;
+}
+
+.ready-btn {
+    background: linear-gradient(135deg, #2ed573 0%, #17a2b8 100%);
+}
+
+.ready-btn.ready {
+    background: linear-gradient(135deg, #ff4757 0%, #c44569 100%);
+}
+
+/* 聊天面板 */
+.chat-panel {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-panel h3 {
+    color: #4facfe;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.chat-messages {
+    flex: 1;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chat-message {
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 90%;
+    word-wrap: break-word;
+    position: relative;
+}
+
+.chat-message.own {
+    background: #4facfe;
+    color: white;
+    align-self: flex-end;
+}
+
+.chat-message.other {
+    background: #e0e0e0;
+    align-self: flex-start;
+}
+
+.chat-message .sender {
+    font-weight: bold;
+    font-size: 0.8em;
+    margin-bottom: 4px;
+}
+
+.chat-message .message {
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.chat-message .timestamp {
+    font-size: 0.7em;
+    opacity: 0.7;
+    margin-top: 4px;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+.chat-input input:focus {
+    border-color: #4facfe;
+}
+
+.chat-input button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #4facfe;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chat-input button:hover {
+    background: #2980b9;
+}
+
+/* 连接面板 */
+.connection-panel {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.connection-panel h3 {
+    color: #4facfe;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.connection-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    background: #f8f9fa;
+}
+
+.status-indicator {
+    font-size: 1.2em;
+    animation: pulse 2s infinite;
+}
+
+.status-indicator.connected {
+    color: #2ed573;
+}
+
+.status-indicator.disconnected {
+    color: #ff4757;
+}
+
+.status-indicator.connecting {
+    color: #ffa502;
+}
+
+.room-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.room-actions input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+.room-actions input:focus {
+    border-color: #4facfe;
+}
+
+.room-actions button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #4facfe;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.room-actions button:hover {
+    background: #2980b9;
+}
+
+/* 游戏信息 */
+.game-info {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    padding: 15px 20px;
+    border-radius: 15px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    min-width: 800px;
+}
+
+.wave-info, .enemy-info, .room-info {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 8px 12px;
+    border-radius: 15px;
+    font-weight: bold;
+    backdrop-filter: blur(5px);
+    font-size: 0.9em;
+}
+
+/* 模态框 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+}
+
+.modal-content h2 {
+    color: #4facfe;
+    margin-bottom: 15px;
+    font-size: 2em;
+}
+
+.modal-content p {
+    margin-bottom: 30px;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.modal-actions button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-actions button:first-child {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+.modal-actions button:last-child {
+    background: #f0f0f0;
+    color: #666;
+}
+
+.modal-actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 玩家区域覆盖层 */
+.player-zone-overlay {
+    position: absolute;
+    border: 3px solid;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* 动画效果 */
+@keyframes pulse {
+    0%, 100% { 
+        transform: scale(1); 
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.1); 
+        opacity: 0.7;
+    }
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .left-panel, .right-panel {
+        flex: none;
+        flex-direction: row;
+        overflow-x: auto;
+    }
+    
+    .left-panel > *, .right-panel > * {
+        min-width: 250px;
+    }
+    
+    .game-area {
+        order: -1;
+    }
+    
+    #gameCanvas {
+        width: 100%;
+        height: auto;
+    }
+    
+    .game-info {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        margin: 10px;
+        border-radius: 10px;
+    }
+    
+    .game-header h1 {
+        font-size: 2em;
+    }
+    
+    .game-stats {
+        gap: 15px;
+    }
+    
+    .stat {
+        min-width: 80px;
+        padding: 8px 15px;
+    }
+    
+    .main-content {
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .tower-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .tower-btn {
+        flex: 1;
+        min-width: 120px;
+        padding: 10px;
+    }
+    
+    .chat-messages {
+        max-height: 200px;
+    }
+}
+
+/* 游戏状态 */
+.game-paused {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.building-mode {
+    cursor: crosshair;
+}
+
+.invalid-build-area {
+    cursor: not-allowed;
+}
+
+/* 塔防特效 */
+.tower-range {
+    stroke: #4facfe;
+    stroke-width: 2;
+    fill: rgba(79, 172, 254, 0.1);
+    stroke-dasharray: 5, 5;
+}
+
+.explosion {
+    animation: explode 0.5s ease-out;
+}
+
+@keyframes explode {
+    0% { 
+        transform: scale(0); 
+        opacity: 1; 
+    }
+    100% { 
+        transform: scale(2); 
+        opacity: 0; 
+    }
+} 

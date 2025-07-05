@@ -1,0 +1,69 @@
+---
+globs: *.js
+---
+
+# 🎮 游戏类设计规则
+
+## 核心游戏类
+项目中的游戏实体应遵循以下类设计模式：
+
+### Tower类（炮塔）
+```javascript
+class Tower {
+    constructor(x, y, type, playerId) {
+        this.x = x;
+        this.y = y;
+        this.type = type;
+        this.config = TOWER_TYPES[type];
+        this.lastFired = 0;
+        this.target = null;
+        this.angle = 0;
+    }
+    
+    update() { /* 寻找目标并开火 */ }
+    findTarget() { /* 在射程内寻找最近敌人 */ }
+    fire() { /* 创建子弹攻击目标 */ }
+    draw() { /* 绘制炮塔和射程 */ }
+}
+```
+
+### Enemy类（敌人）
+```javascript
+class Enemy {
+    constructor(path, health, speed, reward) {
+        this.path = path;
+        this.health = health;
+        this.maxHealth = health;
+        this.speed = speed;
+        this.reward = reward;
+        this.pathIndex = 0;
+    }
+    
+    update() { /* 移动和状态更新 */ }
+    move() { /* 沿路径移动 */ }
+    takeDamage(damage) { /* 受到伤害 */ }
+    draw() { /* 绘制敌人和血条 */ }
+}
+```
+
+### Bullet类（子弹）
+```javascript
+class Bullet {
+    constructor(x, y, targetX, targetY, damage) {
+        this.x = x;
+        this.y = y;
+        this.damage = damage;
+        this.speed = 8;
+        // 计算移动向量
+    }
+    
+    update() { /* 移动和碰撞检测 */ }
+    draw() { /* 绘制子弹 */ }
+}
+```
+
+## 类设计原则
+- 每个游戏实体都有update()和draw()方法
+- 构造函数接收所有必需的初始参数
+- 使用配置对象管理游戏参数
+- 保持类的职责单一性

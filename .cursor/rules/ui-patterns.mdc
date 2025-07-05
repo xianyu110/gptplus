@@ -1,0 +1,57 @@
+---
+globs: *.html,*.css
+---
+
+# 🎨 UI设计模式
+
+## HTML结构模式
+```html
+<!-- 游戏容器 -->
+<div class="game-container">
+    <!-- 游戏画布 -->
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    
+    <!-- 控制面板 -->
+    <div class="control-panel">
+        <!-- 游戏状态 -->
+        <div class="game-stats">
+            <div class="stat-item">
+                <span class="label">关卡:</span>
+                <span class="value" id="level">1</span>
+            </div>
+        </div>
+        
+        <!-- 炮塔选择 -->
+        <div class="tower-selection">
+            <button class="tower-btn selected" data-type="basic">
+                <div class="tower-icon"></div>
+                <div class="tower-info">基础炮塔</div>
+            </button>
+        </div>
+    </div>
+</div>
+```
+
+## CSS设计原则
+- 使用CSS Grid和Flexbox布局
+- 响应式设计适配不同屏幕
+- 渐变背景和圆角设计
+- 悬停效果增强交互体验
+
+## 样式命名规范
+- 使用kebab-case命名class
+- 语义化的class名称
+- 模块化的CSS结构
+- 一致的颜色主题
+
+## 交互状态
+- `.selected` - 选中状态
+- `.disabled` - 禁用状态
+- `:hover` - 悬停效果
+- `.game-paused` - 游戏暂停状态
+
+## 多人游戏UI特色
+- 玩家区域颜色标识
+- 实时聊天面板
+- 连接状态指示器
+- 玩家列表显示
