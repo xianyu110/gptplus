@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线工具大全</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div id="header-title" class="text-2xl font-bold text-gray-800">
+                <i class="fas fa-tools mr-2"></i>在线工具
+            </div>
+            <div>
+                <a href="#" class="text-gray-600 hover:text-blue-500 mx-3">首页</a>
+                <a href="#" class="text-gray-600 hover:text-blue-500 mx-3">关于我们</a>
+                <a href="#" class="text-gray-600 hover:text-blue-500 mx-3">联系方式</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <h1 id="page-title" class="text-4xl font-bold text-center text-gray-800 mb-8">免费好用的在线工具大全</h1>
+
+        <div id="tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Tool categories will be dynamically inserted here from script.js -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-8 py-6">
+        <div class="container mx-auto px-6 text-center text-gray-600">
+            <p>&copy; 2024 在线工具大全. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

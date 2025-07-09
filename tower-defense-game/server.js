@@ -115,6 +115,120 @@ const PATHS = [
     ]
 ];
 
+// 炮塔类
+class Tower {
+    constructor(x, y, type, playerId) {
+        this.x = x;
+        this.y = y;
+        this.type = type;
+        this.playerId = playerId;
+        this.config = TOWER_TYPES[type];
+        this.lastFired = 0;
+        this.target = null;
+        this.angle = 0;
+        this.id = Date.now() + Math.random();
+    }
+
+    update(enemies, bullets, currentTime) {
+        this.findTarget(enemies);
+        this.fire(bullets, currentTime);
+    }
+
+    findTarget(enemies) {
+        let closestEnemy = null;
+        let closestDistance = Infinity;
+
+        for (let enemy of enemies) {
+            if (enemy.isDead) continue;
+            
+            const distance = Math.sqrt(
+                Math.pow(enemy.x - this.x, 2) + 
+                Math.pow(enemy.y - this.y, 2)
+            );
+            
+            if (distance <= this.config.range && distance < closestDistance) {
+                closestDistance = distance;
+                closestEnemy = enemy;
+            }
+        }
+
+        this.target = closestEnemy;
+        
+        if (this.target) {
+            this.angle = Math.atan2(
+                this.target.y - this.y,
+                this.target.x - this.x
+            );
+        }
+    }
+
+    fire(bullets, currentTime) {
+        if (this.target && currentTime - this.lastFired > this.config.fireRate) {
+            bullets.push(new Bullet(
+                this.x, this.y, 
+                this.target.x, this.target.y,
+                this.config.damage,
+                this.target.id
+            ));
+            this.lastFired = currentTime;
+        }
+    }
+}
+
+// 子弹类
+class Bullet {
+    constructor(x, y, targetX, targetY, damage, targetId) {
+        this.x = x;
+        this.y = y;
+        this.targetX = targetX;
+        this.targetY = targetY;
+        this.damage = damage;
+        this.targetId = targetId;
+        this.speed = 8;
+        this.id = Date.now() + Math.random();
+        
+        const dx = targetX - x;
+        const dy = targetY - y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance > 0) {
+            this.vx = (dx / distance) * this.speed;
+            this.vy = (dy / distance) * this.speed;
+        } else {
+            this.vx = 0;
+            this.vy = 0;
+        }
+    }
+
+    update(enemies) {
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        // 检查碰撞
+        for (let i = enemies.length - 1; i >= 0; i--) {
+            const enemy = enemies[i];
+            if (enemy.isDead) continue;
+            
+            const distance = Math.sqrt(
+                Math.pow(enemy.x - this.x, 2) + 
+                Math.pow(enemy.y - this.y, 2)
+            );
+            
+            if (distance < 20) {
+                if (enemy.takeDamage(this.damage)) {
+                    enemies.splice(i, 1);
+                    console.log(`Enemy killed! Reward: ${enemy.reward}`);
+                }
+                return true; // 子弹命中，需要移除
+            }
+        }
+        
+        // 检查是否超出边界
+        return this.x < -50 || this.x > 850 || 
+               this.y < -50 || this.y > 650;
+    }
+}
+
 // 敌人类
 class Enemy {
     constructor(path, health, speed, reward) {
@@ -272,10 +386,31 @@ class GameRoom {
             return;
         }
 
-        // 如果游戏正在进行，处理敌人生成和更新
+        // 如果游戏正在进行，处理游戏逻辑
         if (this.gameState.isPlaying) {
             this.spawnEnemies();
+            this.updateTowers(now);
+            this.updateBullets();
             this.updateEnemies();
+        }
+    }
+
+    updateTowers(currentTime) {
+        // 更新所有炮塔
+        for (let tower of this.gameState.towers) {
+            if (tower.update) {
+                tower.update(this.gameState.enemies, this.gameState.bullets, currentTime);
+            }
+        }
+    }
+
+    updateBullets() {
+        // 更新所有子弹
+        for (let i = this.gameState.bullets.length - 1; i >= 0; i--) {
+            const bullet = this.gameState.bullets[i];
+            if (bullet.update(this.gameState.enemies)) {
+                this.gameState.bullets.splice(i, 1);
+            }
         }
     }
 
@@ -320,9 +455,10 @@ class GameRoom {
 
             // 移除死亡或逃脱的敌人
             if (enemy.isDead) {
-                this.gameState.enemies.splice(i, 1);
+                // 敌人被击杀，不需要从数组中移除，因为子弹系统已经处理了
                 this.gameState.money += enemy.reward;
-                this.gameState.score += enemy.reward;
+                this.gameState.score += enemy.reward * 2;
+                console.log(`Enemy killed in room ${this.id}. Reward: ${enemy.reward} coins`);
             } else if (enemy.hasEscaped) {
                 this.gameState.enemies.splice(i, 1);
                 this.gameState.lives--;
@@ -469,14 +605,7 @@ io.on('connection', (socket) => {
             return;
         }
 
-        const tower = {
-            id: Date.now() + Math.random(),
-            x: x,
-            y: y,
-            type: towerType,
-            playerId: socket.playerId,
-            createdAt: Date.now()
-        };
+        const tower = new Tower(x, y, towerType, socket.playerId);
 
         room.gameState.towers.push(tower);
         room.gameState.money -= cost;

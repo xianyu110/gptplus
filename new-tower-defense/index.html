@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>塔防游戏 - 单人模式</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 塔防游戏</h1>
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="single">单人模式</button>
+                <button class="mode-btn" data-mode="multi" onclick="window.location.href='multiplayer.html'">多人模式</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="game-area">
+                <div class="game-info">
+                    <div class="info-item">
+                        <span class="label">生命值:</span>
+                        <span id="lives" class="value">20</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">金币:</span>
+                        <span id="money" class="value">100</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">波次:</span>
+                        <span id="wave" class="value">1</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">关卡:</span>
+                        <span id="level" class="value">1</span>
+                    </div>
+                </div>
+
+                <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+                <div class="control-panel">
+                    <h3>🏗️ 炮塔建造</h3>
+                    <div class="tower-buttons">
+                        <button class="tower-btn" data-type="basic">
+                            <div class="tower-icon" style="background-color: #4facfe;"></div>
+                            <div class="tower-info">
+                                <span class="tower-name">基础炮塔</span>
+                                <span class="tower-cost">💰 20</span>
+                            </div>
+                        </button>
+                        <button class="tower-btn" data-type="heavy">
+                            <div class="tower-icon" style="background-color: #ff4757;"></div>
+                            <div class="tower-info">
+                                <span class="tower-name">重炮塔</span>
+                                <span class="tower-cost">💰 50</span>
+                            </div>
+                        </button>
+                        <button class="tower-btn" data-type="rapid">
+                            <div class="tower-icon" style="background-color: #ffa502;"></div>
+                            <div class="tower-info">
+                                <span class="tower-name">速射炮塔</span>
+                                <span class="tower-cost">💰 35</span>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <div class="game-controls">
+                        <button id="startWave" class="action-btn">开始波次</button>
+                        <button id="pauseGame" class="action-btn">暂停游戏</button>
+                        <button id="resetGame" class="action-btn">重置游戏</button>
+                    </div>
+
+                    <div class="level-selector">
+                        <h3>🎯 关卡选择</h3>
+                        <button class="level-btn active" data-level="1">简单关卡</button>
+                        <button class="level-btn" data-level="2">中等关卡</button>
+                        <button class="level-btn" data-level="3">困难关卡</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div id="gameOverModal" class="modal">
+            <div class="modal-content">
+                <h2 id="gameOverTitle">游戏结束</h2>
+                <p id="gameOverMessage"></p>
+                <button id="restartBtn" class="action-btn">重新开始</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html> 

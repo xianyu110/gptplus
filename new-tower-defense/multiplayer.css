@@ -1,0 +1,514 @@
+/* 继承单人模式的基础样式 */
+@import url('style.css');
+
+/* 多人模式特定样式 */
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* 加入房间界面 */
+.join-room-card {
+    max-width: 400px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.join-room-card h2 {
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 1.8rem;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #4facfe;
+}
+
+.action-btn.secondary {
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border: 2px solid #ddd;
+    margin-left: 10px;
+}
+
+.action-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #4facfe;
+}
+
+.action-btn.small {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+}
+
+.status-message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    min-height: 20px;
+}
+
+.status-message.success {
+    background: rgba(46, 213, 115, 0.2);
+    color: #27ae60;
+}
+
+.status-message.error {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+.status-message.info {
+    background: rgba(79, 172, 254, 0.2);
+    color: #4facfe;
+}
+
+/* 游戏大厅界面 */
+.lobby-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.lobby-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eee;
+}
+
+.lobby-header h2 {
+    margin: 0;
+    color: #333;
+}
+
+.room-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.room-info span {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.lobby-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.players-section, .chat-section {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.players-section h3, .chat-section h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.players-list {
+    min-height: 200px;
+    margin-bottom: 15px;
+}
+
+.player-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.player-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.player-info {
+    flex: 1;
+}
+
+.player-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 1rem;
+}
+
+.player-zone {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 2px;
+}
+
+.player-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.player-status.ready {
+    color: #27ae60;
+}
+
+.player-status.not-ready {
+    color: #e74c3c;
+}
+
+.player-status.host {
+    color: #f39c12;
+}
+
+.ready-section {
+    text-align: center;
+}
+
+/* 聊天系统 */
+.chat-messages {
+    height: 200px;
+    overflow-y: auto;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: white;
+}
+
+.chat-messages.small {
+    height: 150px;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    background: rgba(79, 172, 254, 0.1);
+    border-left: 3px solid #4facfe;
+}
+
+.chat-message.own {
+    background: rgba(46, 213, 115, 0.1);
+    border-left-color: #2ed573;
+}
+
+.chat-message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.chat-message-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.chat-message-time {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.chat-message-text {
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.4;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 8px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.chat-input input:focus {
+    outline: none;
+    border-color: #4facfe;
+}
+
+/* 游戏界面 */
+.game-area {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eee;
+}
+
+.game-content {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    gap: 20px;
+}
+
+.game-canvas-container {
+    position: relative;
+}
+
+.player-zones {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.player-zone {
+    position: absolute;
+    border: 2px solid;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.player-zone.own {
+    background: rgba(255, 255, 255, 0.2);
+    border-width: 3px;
+}
+
+.game-sidebar {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 15px;
+    height: fit-content;
+}
+
+.tower-section {
+    margin-bottom: 20px;
+}
+
+.tower-section h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.tower-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.game-chat {
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+}
+
+.game-chat h3 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 1rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .lobby-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .game-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .game-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .game-info {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .info-item {
+        flex: 1;
+        min-width: 120px;
+    }
+    
+    .lobby-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .room-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* 加载动画 */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #4facfe;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 连接状态指示器 */
+.connection-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.connection-indicator.connected {
+    background: #27ae60;
+    animation: pulse 2s infinite;
+}
+
+.connection-indicator.disconnected {
+    background: #e74c3c;
+}
+
+.connection-indicator.connecting {
+    background: #f39c12;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* 特殊效果 */
+.player-join-effect {
+    animation: slideInRight 0.5s ease-out;
+}
+
+.player-leave-effect {
+    animation: slideOutRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* 游戏状态指示器 */
+.game-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    z-index: 10;
+}
+
+.game-status.playing {
+    background: rgba(46, 213, 115, 0.8);
+}
+
+.game-status.waiting {
+    background: rgba(79, 172, 254, 0.8);
+}
+
+.game-status.paused {
+    background: rgba(255, 165, 2, 0.8);
+} 

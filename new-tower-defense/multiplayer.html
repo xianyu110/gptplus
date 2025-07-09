@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>塔防游戏 - 多人模式</title>
+    <link rel="stylesheet" href="multiplayer.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 塔防游戏 - 多人模式</h1>
+            <div class="mode-selector">
+                <button class="mode-btn" onclick="window.location.href='/'">单人模式</button>
+                <button class="mode-btn active" data-mode="multi">多人模式</button>
+            </div>
+        </header>
+
+        <!-- 加入房间界面 -->
+        <div id="joinRoomScreen" class="screen active">
+            <div class="join-room-card">
+                <h2>🏠 加入游戏房间</h2>
+                <div class="input-group">
+                    <label for="playerName">玩家名称:</label>
+                    <input type="text" id="playerName" placeholder="请输入您的名称" maxlength="20">
+                </div>
+                <div class="input-group">
+                    <label for="roomId">房间ID:</label>
+                    <input type="text" id="roomId" placeholder="请输入房间ID" maxlength="10">
+                </div>
+                <button id="joinRoomBtn" class="action-btn">加入房间</button>
+                <button id="createRoomBtn" class="action-btn secondary">创建房间</button>
+                <div id="connectionStatus" class="status-message"></div>
+            </div>
+        </div>
+
+        <!-- 游戏大厅界面 -->
+        <div id="lobbyScreen" class="screen">
+            <div class="lobby-container">
+                <div class="lobby-header">
+                    <h2>🎯 游戏大厅</h2>
+                    <div class="room-info">
+                        <span>房间ID: <strong id="currentRoomId"></strong></span>
+                        <button id="leaveRoomBtn" class="action-btn small">离开房间</button>
+                    </div>
+                </div>
+
+                <div class="lobby-content">
+                    <div class="players-section">
+                        <h3>👥 玩家列表</h3>
+                        <div id="playersList" class="players-list"></div>
+                        <div class="ready-section">
+                            <button id="readyBtn" class="action-btn">准备</button>
+                            <button id="startGameBtn" class="action-btn" style="display: none;">开始游戏</button>
+                        </div>
+                    </div>
+
+                    <div class="chat-section">
+                        <h3>💬 聊天室</h3>
+                        <div id="chatMessages" class="chat-messages"></div>
+                        <div class="chat-input">
+                            <input type="text" id="chatInput" placeholder="输入消息..." maxlength="100">
+                            <button id="sendChatBtn" class="action-btn small">发送</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏界面 -->
+        <div id="gameScreen" class="screen">
+            <div class="game-area">
+                <div class="game-header">
+                    <div class="game-info">
+                        <div class="info-item">
+                            <span class="label">生命值:</span>
+                            <span id="lives" class="value">20</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">金币:</span>
+                            <span id="money" class="value">100</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">波次:</span>
+                            <span id="wave" class="value">1</span>
+                        </div>
+                    </div>
+                    <div class="game-controls">
+                        <button id="startWaveBtn" class="action-btn">开始波次</button>
+                        <button id="pauseBtn" class="action-btn">暂停</button>
+                        <button id="exitGameBtn" class="action-btn">退出游戏</button>
+                    </div>
+                </div>
+
+                <div class="game-content">
+                    <div class="game-canvas-container">
+                        <canvas id="gameCanvas" width="800" height="600"></canvas>
+                        <div id="playerZones" class="player-zones"></div>
+                    </div>
+
+                    <div class="game-sidebar">
+                        <div class="tower-section">
+                            <h3>🏗️ 炮塔建造</h3>
+                            <div class="tower-buttons">
+                                <button class="tower-btn" data-type="basic">
+                                    <div class="tower-icon" style="background-color: #4facfe;"></div>
+                                    <div class="tower-info">
+                                        <span class="tower-name">基础炮塔</span>
+                                        <span class="tower-cost">💰 20</span>
+                                    </div>
+                                </button>
+                                <button class="tower-btn" data-type="heavy">
+                                    <div class="tower-icon" style="background-color: #ff4757;"></div>
+                                    <div class="tower-info">
+                                        <span class="tower-name">重炮塔</span>
+                                        <span class="tower-cost">💰 50</span>
+                                    </div>
+                                </button>
+                                <button class="tower-btn" data-type="rapid">
+                                    <div class="tower-icon" style="background-color: #ffa502;"></div>
+                                    <div class="tower-info">
+                                        <span class="tower-name">速射炮塔</span>
+                                        <span class="tower-cost">💰 35</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="game-chat">
+                            <h3>💬 游戏聊天</h3>
+                            <div id="gameChatMessages" class="chat-messages small"></div>
+                            <div class="chat-input">
+                                <input type="text" id="gameChatInput" placeholder="输入消息..." maxlength="100">
+                                <button id="sendGameChatBtn" class="action-btn small">发送</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 错误提示模态框 -->
+        <div id="errorModal" class="modal">
+            <div class="modal-content">
+                <h2>❌ 错误</h2>
+                <p id="errorMessage"></p>
+                <button id="errorOkBtn" class="action-btn">确定</button>
+            </div>
+        </div>
+
+        <!-- 游戏结束模态框 -->
+        <div id="gameOverModal" class="modal">
+            <div class="modal-content">
+                <h2 id="gameOverTitle">游戏结束</h2>
+                <p id="gameOverMessage"></p>
+                <button id="gameOverOkBtn" class="action-btn">返回大厅</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="multiplayer.js"></script>
+</body>
+</html> 
