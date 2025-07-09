@@ -1,25 +1,9 @@
----
-alwaysApply: true
----
 
-# 🎮 塔防游戏项目结构规则
+# 导航站项目结构
 
-## 项目概览
-这是一个基于Web技术的多人塔防游戏，支持单人和多人模式。
+这个项目是一个静态的导航网站，其核心由以下几个文件组成：
 
-## 核心文件结构
-- **单人模式**：[index.html](mdc:tower-defense-game/index.html) + [game.js](mdc:tower-defense-game/game.js) + [style.css](mdc:tower-defense-game/style.css)
-- **多人模式**：[multiplayer.html](mdc:tower-defense-game/multiplayer.html) + [multiplayer.js](mdc:tower-defense-game/multiplayer.js) + [multiplayer.css](mdc:tower-defense-game/multiplayer.css)
-- **服务器**：[server.js](mdc:tower-defense-game/server.js)
-- **配置**：[package.json](mdc:tower-defense-game/package.json)
-
-## 架构原则
-- 前后端分离设计
-- 单人和多人模式代码分离
-- 配置驱动的游戏参数
-- 模块化的类设计
-- 实时通信使用Socket.IO
-
-## 部署方式
-- 单人模式：`python3 -m http.server 8000`
-- 多人模式：`node server.js`（端口3000）
+-   `[index.html](mdc:chongbuluo-clone/index.html)`: 网站的 HTML 骨架，包含了所有的导航链接、分类、搜索框和 `iframe` 容器。
+-   `[style.css](mdc:chongbuluo-clone/style.css)`: 负责网站的全部视觉样式，包括布局、颜色和字体。
+-   `[script.js](mdc:chongbuluo-clone/script.js)`: 处理网站的所有交互逻辑，例如切换搜索引擎、执行搜索以及加载 `iframe` 内容。
+-   `[README.md](mdc:chongbuluo-clone/README.md)`: 项目的说明文档。

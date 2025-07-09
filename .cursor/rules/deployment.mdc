@@ -1,0 +1,24 @@
+# 部署流程
+
+该项目通过 **GitHub Pages** 进行部署。要发布任何本地的更改，请遵循以下标准的 Git 工作流程：
+
+1.  **添加更改到暂存区:**
+    ```bash
+    git add .
+    ```
+
+2.  **提交更改:**
+    ```bash
+    git commit -m "feat: 你的提交信息"
+    ```
+
+3.  **推送到远程仓库:**
+    ```bash
+    git push origin master
+    ```
+
+推送完成后，GitHub Pages 会自动重新部署，网站将在几分钟后更新。
+description:
+globs:
+alwaysApply: false
+---

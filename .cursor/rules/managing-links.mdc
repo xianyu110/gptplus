@@ -1,0 +1,26 @@
+# 内容管理：添加或修改导航链接
+
+网站的所有导航链接都在 `[index.html](mdc:chongbuluo-clone/index.html)` 文件中进行管理。
+
+### 添加新链接
+
+要添加一个新的网站链接，请在相应的分类 `<ul>` 列表中，仿照以下格式添加一个新的 `<li>` 元素：
+
+```html
+<li data-search-url="搜索地址" data-home-url="主页地址">
+    <a href="#"><i class="fas fa-..."></i> 网站名称</a>
+</li>
+```
+
+-   **`data-search-url`**: 网站的搜索查询地址。将实际的搜索词替换为占位符。如果网站不支持直接搜索，请留空。
+    *   例如: `https://www.google.com/search?q=`
+-   **`data-home-url`**: 当点击侧边栏时，在 `iframe` 中加载的网站主页地址。
+-   **`<i>` 标签**: 来自 [Font Awesome](https://fontawesome.com/search) 的图标，用于美化。
+
+### 外部服务
+
+-   **访问统计**: 使用 [不蒜子 (Busuanzi)](http://busuanzi.ibruce.info/)，它通过在 `index.html` 中引入其脚本来自动工作。
+description:
+globs:
+alwaysApply: false
+---
