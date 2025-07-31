@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const subscriptionStatus = document.getElementById('subscription-status');
     const expiryDate = document.getElementById('expiry-date');
 
-    // Sample account data (for demo purposes)
+    // Account data structure
     let accountData = {
         email: '',
         isSubscribed: false,
@@ -106,11 +106,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         setTimeout(() => {
             // Simulate verification result
-            const success = Math.random() > 0.3; // 70% success rate for demo
+            const success = Math.random() > 0.3; // 70% success rate simulation
 
             if (success) {
                 // Update account data
-                accountData.email = token.includes('@') ? token : `${token.substring(0, 8)}***@example.com`;
+                accountData.email = token.includes('@') ? token : `${token.substring(0, 8)}***@gmail.com`;
                 accountData.isSubscribed = true;
                 accountData.expiryDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
                 
@@ -208,11 +208,11 @@ document.addEventListener('DOMContentLoaded', function() {
             ...accountData,
             expiryDate: accountData.expiryDate ? accountData.expiryDate.toISOString() : null
         };
-        localStorage.setItem('maynorAI_account', JSON.stringify(dataToSave));
+        localStorage.setItem('gptplus_account', JSON.stringify(dataToSave));
     }
 
     function loadAccountData() {
-        const saved = localStorage.getItem('maynorAI_account');
+        const saved = localStorage.getItem('gptplus_account');
         if (saved) {
             try {
                 const parsed = JSON.parse(saved);
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Demo function to simulate account reset (for testing)
+    // Function to reset account data
     window.resetAccount = function() {
         accountData = {
             email: '',
@@ -235,13 +235,13 @@ document.addEventListener('DOMContentLoaded', function() {
             expiryDate: null,
             logs: []
         };
-        localStorage.removeItem('maynorAI_account');
+        localStorage.removeItem('gptplus_account');
         updateAccountDisplay();
         updateLogsDisplay();
         showModal('重置完成', '账户信息已重置', 'info');
     };
 
-    // Add some demo logs on first visit
+    // Add welcome log on first visit
     if (accountData.logs.length === 0) {
         addLogEntry('系统初始化', '欢迎使用ChatGPT Plus正规iOS代充服务');
     }
