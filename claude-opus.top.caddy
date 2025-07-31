@@ -1,0 +1,120 @@
+claude-opus.top {
+    # 全局代理头设置
+    header {
+        Strict-Transport-Security "max-age=31536000"
+    }
+
+    # TLS配置
+    tls /www/server/panel/vhost/cert/claude-opus.top/fullchain.pem /www/server/panel/vhost/cert/claude-opus.top/privkey.pem
+
+    # 根路径重定向到 kelaode.maynor1024.live
+    redir / https://kelaode.maynor1024.live/ permanent
+
+    # 启用调试日志
+    log {
+        output stderr
+        level DEBUG
+    }
+
+    # 处理静态文件和next.js请求
+    @static {
+        path /_next/* /static/* /images/* /favicon.ico /sw.js
+    }
+    handle @static {
+        reverse_proxy http://127.0.0.1:8305 {
+            header_up Host {host}
+            header_up X-Real-IP {remote}
+            header_up X-Forwarded-For {remote}
+            header_up X-Forwarded-Proto {scheme}
+            # 增加超时时间
+            transport http {
+                read_timeout 30s
+                write_timeout 30s
+                response_header_timeout 30s
+            }
+        }
+    }
+
+    # 处理 /list 路径的重定向问题
+    @list {
+        path /list /list/*
+    }
+    handle @list {
+        reverse_proxy http://127.0.0.1:8306 {
+            header_up Host {host}
+            header_up X-Real-IP {remote}
+            header_up X-Forwarded-For {remote}
+            header_up X-Forwarded-Proto {scheme}
+            header_down -Location
+        }
+    }
+
+    # 其他8306端口的路由
+    handle_path /exend/* {
+        reverse_proxy http://127.0.0.1:8306 {
+            header_up Host {host}
+            header_up X-Real-IP {remote}
+            header_up X-Forwarded-For {remote}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+    
+    handle_path /admin/* {
+        reverse_proxy http://127.0.0.1:8306 {
+            header_up Host {host}
+            header_up X-Real-IP {remote}
+            header_up X-Forwarded-For {remote}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+    
+    handle_path /xyhelper/* {
+        reverse_proxy http://127.0.0.1:8306 {
+            header_up Host {host}
+            header_up X-Real-IP {remote}
+            header_up X-Forwarded-For {remote}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+    
+    # 修改 /u 路径的处理
+    @u {
+        path /u /u/*
+    }
+    handle @u {
+        reverse_proxy http://127.0.0.1:8306 {
+            header_up Host {host}
+            header_up X-Real-IP {remote}
+            header_up X-Forwarded-For {remote}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    # soruxgpt 重定向
+    @soruxgpt {
+        path_regexp /soruxgpt(/.*)?
+    }
+    redir @soruxgpt /maynorai{re.1} permanent
+
+    # 主路由处理所有其他请求
+    handle {
+        reverse_proxy http://127.0.0.1:8305 {
+            header_up Host {host}
+            header_up X-Real-IP {remote}
+            header_up X-Forwarded-For {remote}
+            header_up X-Forwarded-Proto {scheme}
+            # 增加超时时间
+            transport http {
+                read_timeout 30s
+                write_timeout 30s
+                response_header_timeout 30s
+            }
+        }
+    }
+
+    # 错误日志
+    log {
+        output file /www/wwwlogs/claude-opus.top.error.log
+        level ERROR
+    }
+} 

@@ -11,4 +11,46 @@ npm-debug.log*
 
 # OS
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Screenshots
+PixPin_*.png
+Screenshot_*.png
+
+# Archive files
+*.tar.gz
+*.zip
+*.rar
+
+# Claude files
+.claude/
+
+# Large project directories (only keep GitHub Pages files in root)
+99AI/
+ai-news-*/
+aigo88.cn/
+blog-auto-publishing-tools/
+chromedriver-*/
+claude-*/
+cloudbase-*/
+csdn_*/
+docker-deploy/
+snake-game-bot/
+tower-defense-game/
+watermark-*/
+web-tools-suite/
+wechat-*/
+xiaohongshu-*/
+mcp-packages/
+awesome-*/
+chongbuluo-*/
+new-*/
+
+# Documentation not needed for GitHub Pages (keep only README.md)
+Claude-Code-*.md
+在线工具导航网站-*.md
+mcp提示词.md
+播客应用开发提示词.md
+claudecode安装指南.md
+demo.md
+错误分析/ 

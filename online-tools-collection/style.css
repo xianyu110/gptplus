@@ -16,7 +16,7 @@ a {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px 60px 20px 20px;
+    padding: 20px;
 }
 
 /* 顶部导航 */
@@ -211,96 +211,65 @@ a {
     font-size: 14px;
 }
 
-/* 右侧导航样式优化 */
-.side-nav {
-    position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-radius: 30px;
-    padding: 15px 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    z-index: 100;
-    transition: all 0.3s ease;
-}
-
-.side-nav:hover {
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-}
-
-.side-nav a {
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    margin: 4px 0;
-    border-radius: 50%;
-    color: #666;
-    font-size: 1.2em;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.side-nav a:hover {
-    color: #1a73e8;
-    background: rgba(26, 115, 232, 0.1);
-}
-
-/* 添加悬停提示 */
-.side-nav a::before {
-    content: attr(data-title);
-    position: absolute;
-    right: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 14px;
-    white-space: nowrap;
-    margin-right: 10px;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.side-nav a:hover::before {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* 返回顶部按钮样式优化 */
+/* 返回顶部按钮 */
 .back-to-top {
     position: fixed;
-    right: 20px;
-    bottom: 20px;
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.9);
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    background-color: #1a73e8;
+    color: #fff;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #666;
-    text-decoration: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 100;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    transform: translateY(20px);
 }
 
-.back-to-top.visible {
+.back-to-top.show {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
 }
 
-.back-to-top:hover {
-    background: #fff;
+/* 右侧快捷导航 */
+.quick-nav {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background-color: #fff;
+    border-radius: 8px 0 0 8px;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.08);
+    padding: 10px 5px;
+}
+
+.quick-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.quick-nav .nav-item:hover {
     color: #1a73e8;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.quick-nav .nav-item i {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.quick-nav .nav-item span {
+    font-size: 12px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
 } 
