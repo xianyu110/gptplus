@@ -147,7 +147,7 @@
 ## 🔗 快速入口
 
 ### 🚀 立即升级
-> **ChatGPT Plus自助升级地址：** https://nice.chatgpt-plus.top/
+> **ChatGPT Plus自助升级地址：** https://nice.claude-opus.top/
 
 ### 🛒 购买卡密
 > **卡密获取地址：** https://717ka.com/p/9ezez0xoho8qe7u2w6q1roul
