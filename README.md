@@ -149,9 +149,7 @@
 ### 🚀 立即升级
 > **ChatGPT Plus自助升级地址：** https://nice.claude-opus.top/
 
-### 🛒 购买卡密
-> **卡密获取地址：** https://717ka.com/p/9ezez0xoho8qe7u2w6q1roul
-> 
+联系微信客服 coder-maynor
 > （或直接点击"阅读原文"跳转）
 
 ---
